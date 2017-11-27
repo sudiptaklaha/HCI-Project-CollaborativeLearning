@@ -10,7 +10,7 @@ function init() {
     camera.position.set(0, 6, 0);
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0xcccccc );
+    scene.background = new THREE.Color( 0x333333 );
 
     var light = new THREE.AmbientLight( 0xffffff ); // soft white light
     scene.add(light);
@@ -21,7 +21,7 @@ function init() {
     document.body.appendChild( renderer.domElement );
 
     var loader = new THREE.JSONLoader();
-    loader.load('./eyeball.json', 
+    loader.load('./models/ant/ant.json', 
 
         function(geometry, materials) {
             mesh = new THREE.Mesh(geometry, materials);
@@ -49,11 +49,14 @@ function animate() {
 
     requestAnimationFrame( animate );
 
+    /*
     if (mesh) {
 	    mesh.rotation.x -= 0.01;
 	    mesh.rotation.y -= 0.01;
 	    mesh.rotation.z += 0.01;
 	}
+    */
+
     renderer.render( scene, camera );
     controls.update();
 }
