@@ -1,37 +1,59 @@
-// Set the scene size.
-const WIDTH = 400;
-const HEIGHT = 300;
+var camera, scene, renderer;
+var geometry, material, mesh;
 
-// Set some camera attributes.
-const VIEW_ANGLE = 45;
-const ASPECT = WIDTH / HEIGHT;
-const NEAR = 0.1;
-const FAR = 10000;
+init();
+animate();
 
-// Get the DOM element to attach to
-const container = document.querySelector('#container');
+function init() {
 
-console.log(container);
+    camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 0.01, 1000 );
+    camera.position.set(0, 6, 0);
 
-// Create a WebGL renderer, camera
-// and a scene
-const renderer = new THREE.WebGLRenderer();
-const camera =
-    new THREE.PerspectiveCamera(
-        VIEW_ANGLE,
-        ASPECT,
-        NEAR,
-        FAR
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color( 0xcccccc );
+
+    // Create a light, set its position, and add it to the scene.
+    var light = new THREE.AmbientLight( 0xffffff ); // soft white light
+    scene.add(light);
+
+    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    
+    document.body.appendChild( renderer.domElement );
+
+    var loader = new THREE.JSONLoader();
+    loader.load('./eyeball.json', 
+
+        function(geometry, materials) {
+            mesh = new THREE.Mesh(geometry, materials);
+            mesh.position.set(0, 0, 0);
+            scene.add(mesh);
+        },
+
+        // Function called when download progresses
+        function ( xhr ) {
+            console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+        },
+
+        // Function called when download errors
+        function ( xhr ) {
+            console.error( 'An error happened' );
+        }
     );
 
-const scene = new THREE.Scene();
+    // Add OrbitControls so that we can pan around with the mouse.
+    controls = new THREE.OrbitControls(camera);
+    
+}
 
-// Add the camera to the scene.
-scene.add(camera);
+function animate() {
 
-// Start the renderer.
-renderer.setSize(WIDTH, HEIGHT);
+    requestAnimationFrame( animate );
 
-// Attach the renderer-supplied
-// DOM element.
-container.appendChild(renderer.domElement);
+    mesh.rotation.x -= 0.01;
+    mesh.rotation.y -= 0.01;
+    mesh.rotation.z += 0.01;
+
+    renderer.render( scene, camera );
+    controls.update();
+}
