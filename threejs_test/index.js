@@ -12,7 +12,6 @@ function init() {
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xcccccc );
 
-    // Create a light, set its position, and add it to the scene.
     var light = new THREE.AmbientLight( 0xffffff ); // soft white light
     scene.add(light);
 
@@ -50,10 +49,11 @@ function animate() {
 
     requestAnimationFrame( animate );
 
-    mesh.rotation.x -= 0.01;
-    mesh.rotation.y -= 0.01;
-    mesh.rotation.z += 0.01;
-
+    if (mesh) {
+	    mesh.rotation.x -= 0.01;
+	    mesh.rotation.y -= 0.01;
+	    mesh.rotation.z += 0.01;
+	}
     renderer.render( scene, camera );
     controls.update();
 }
