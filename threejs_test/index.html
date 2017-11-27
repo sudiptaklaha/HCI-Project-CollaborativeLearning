@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <script src="three.min.js"></script>
+    </head>
+    <body>
+        <script>
+            var camera, scene, renderer;
+            var geometry, material, mesh, newMesh;
+
+            init();
+            animate();
+
+            function init() {
+
+                camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
+                camera.position.z = 1;
+
+                scene = new THREE.Scene();
+
+                geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+                material = new THREE.MeshNormalMaterial();
+
+                mesh = new THREE.Mesh( geometry, material );
+                //scene.add( mesh );
+
+                renderer = new THREE.WebGLRenderer( { antialias: true } );
+                renderer.setSize( window.innerWidth, window.innerHeight );
+                document.body.appendChild( renderer.domElement );
+
+                var loader = new THREE.ObjectLoader();
+
+                /*
+                loader.load(
+                    // resource URL
+                    "teapot-claraio.json",
+
+                    // pass the loaded data to the onLoad function.
+                    //Here it is assumed to be an object
+                    function ( obj ) {
+                        //add the loaded object to the scene
+                        //obj.position.set( 2, 4, 5 );
+                        //obj.scale.set( 0.5, 0.5, 0.5 );
+                        scene.add( obj );
+                    },
+
+                    // Function called when download progresses
+                    function ( xhr ) {
+                        console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+                    },
+
+                    // Function called when download errors
+                    function ( xhr ) {
+                        console.error( 'An error happened' );
+                    }
+                );
+                */
+
+                var newLoader = new THREE.JSONLoader();
+                newLoader.load('./eyeball.json', function(geometry) {
+                    newMesh = new THREE.Mesh(geometry);
+                    scene.add(newMesh);
+                });
+                
+            }
+
+            function animate() {
+
+                requestAnimationFrame( animate );
+
+                mesh.rotation.x += 0.01;
+                mesh.rotation.y += 0.02;
+
+                //newMesh.rotation.x += 0.01;
+                //newMesh.rotation.y += 0.02;
+
+                renderer.render( scene, camera );
+
+            }
+        </script>
+    </body>
+</html>
