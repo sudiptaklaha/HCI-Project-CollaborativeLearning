@@ -1,0 +1,212 @@
+﻿<html>
+<head>
+</head>
+<body>
+<!--<canvas id="leap-overlay"></canvas>-->
+<script src="//js.leapmotion.com/leap-0.6.3.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #leap-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    #cursor {
+            width: 60px;
+            height: 60px;
+            position: fixed;
+            margin-left: -50px;
+            margin-top: -50px;
+            z-index: 910;
+            opacity: 0.9;
+            background: black;
+            border-radius: 100%;
+            background: -webkit-radial-gradient(100px 100px, circle, #5cabff, #000);
+            background: -moz-radial-gradient(100px 100px, circle, #5cabff, #000);
+            background: radial-gradient(100px 100px, circle, #5cabff, #000);
+        }
+</style>
+<script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var svg = d3.select("body").append("svg").attr('id', 'svgele')
+    .attr("height", height)
+    .attr("width", width)
+    .append('g')
+    //.attr('transform', 'translate(' + width + ',' + height + ')');
+
+
+    var palmCursor=svg.append('circle')
+    .attr('id', "palmCursor")
+    .attr('cx', 10)
+    .attr('cy', 10)
+    .attr('r', 20)
+    .attr('fill', 'black');
+
+    var indexCursor = svg.append('circle')
+    .attr('id', "indexCursor")
+    .attr('cx', 100)
+    .attr('cy', 100)
+    .attr('r', 10)  
+    .attr('fill', 'red');
+
+    function concatData(id, data) {
+        return id + ": " + data + "";  
+    }
+    var text = "";
+
+    svg.append("text")
+    .attr('id', "text1")
+    .attr('x',110)
+    .attr('y', 110)
+    //.attr('fill','red')
+    .attr('text-anchor', 'left')
+    .text('');
+
+    svg.append("text")
+    .attr('id', "text2")
+    .attr('x', 110)
+    .attr('y', 130)
+    .attr('text-anchor', 'left')
+    .text('');
+
+    var element = svg.append('rect')
+    .attr('id', "rectObject")
+    .attr('x', 500)
+    .attr('y', 500)
+    .attr("width", 100)
+    .attr("height", 100)
+    .attr('fill', 'blue');
+
+    var nameMap = ["thumb", "index", "middle", "ring", "pinky"];
+    
+    var rightHand;
+    var isMovingEnabled = 0;
+    var indexPosition;
+    var normalizedIndexPosition;
+    var elementToMove;
+
+    var options = { enableGestures: true };
+    var controller = Leap.loop(options, function (frame) {
+        
+        var interactionBox = frame.interactionBox;
+        //console.log('Interaction Box is:' + interactionBox);
+        //var normalizedPosition = interactionBox.normalizePoint(pointable.tipPosition, true);
+
+        //text = concatData('frame_id', frame.id);
+        //text += concatData('numHands', frame.hands.length);
+        //text += concatData('num fingers', frame.fingers.length);
+        //text += '<br/>';
+        //.attr('fill', 'red')
+        d3.select('#text1')
+        .text(concatData('Frame Id:', frame.id));
+
+        d3.select("#text2")
+        .text(concatData('Number of Hands', frame.hands.length));
+
+        for (var i = 0, len = frame.hands.length; i < len; i++) {
+            rightHand = frame.hands[i].type;
+            if (rightHand == 'right') {
+                //var screenPosition = frame.hands[i].screenPosition(frame.hands[i].palmPosition);
+                var palmPosition = frame.hands[i].palmPosition;
+                var normalizedPosition = interactionBox.normalizePoint(palmPosition, true);
+                //console.log('Screen Position is:' + normalizedPosition);
+                palmCursor.attr('cx', width*normalizedPosition[0])
+                palmCursor.attr('cy', height * (1 - normalizedPosition[1]));
+
+                frame.hands[i].fingers.forEach(function (finger) {
+                    var fingerName = nameMap[finger.type];
+                    if(fingerName=='index')
+                    {
+                        
+                        indexPosition = finger.pipPosition;
+                        normalizedIndexPosition = interactionBox.normalizePoint(indexPosition, true);
+
+                        indexCursor.
+                        attr('cx', width * normalizedIndexPosition[0])
+                        .attr('cy', height * (1 - normalizedIndexPosition[1]));
+                        
+                        if(isMovingEnabled == 1)
+                        {
+                            
+                            var id = elementToMove.id;
+                            id = '#' + id;
+                            console.log('id is: ' + id);
+                            d3.select(id).attr('x', width * normalizedIndexPosition[0])
+                            .attr('y', height * (1 - normalizedIndexPosition[1]));
+                        }
+                        
+                    }
+                });
+                
+            }
+        }
+        if (frame.valid && frame.gestures.length > 0) {
+            frame.gestures.forEach(function (gesture) {
+                switch (gesture.type) {
+                    case "circle":
+                        console.log("Circle Gesture");
+                        break;
+                    case "keyTap":
+                        console.log("Key Tap Gesture");
+                        console.log('is Moving Enabled' + isMovingEnabled);
+                        if (isMovingEnabled==0)
+                        {
+                            elementToMove = document.elementFromPoint(width * normalizedIndexPosition[0], height * (1 - normalizedIndexPosition[1]));
+                            isMovingEnabled = 1;
+                        }
+                        else if (isMovingEnabled==1)
+                        {
+                            isMovingEnabled = 0;
+                        }
+                        console.log('Is Moving Enabled' + isMovingEnabled);
+                        break;
+                    case "screenTap":
+                        console.log("Screen Tap Gesture");
+                        break;
+                    case "swipe":
+                        console.log("Swipe Gesture");
+                        console.log(gesture.id);
+                        break;
+                }
+            });
+        }
+        
+    });
+
+    /*controller.on("gesture", function (gesture) {
+        //... handle gesture object
+        switch (gesture.type) {
+            case "circle":
+                console.log("Circle Gesture");
+                //console.log('circle gesture raduis:' + gesture.raduis);
+                break;
+            case "keyTap":
+                console.log("Key Tap Gesture");
+                break;
+            case "screenTap":
+                console.log("Screen Tap Gesture");
+                break;
+            case "swipe":
+                console.log("Swipe Gesture");
+                console.log(gesture.id);
+                break;
+        }
+
+    });*/
+     
+
+
+
+
+</script>
+</body>
+</html>
