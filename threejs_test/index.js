@@ -10,9 +10,9 @@ function init() {
     camera.position.set(0, 6, 0);
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0x333333 );
+    scene.background = new THREE.Color( 0xffffff );
 
-    var light = new THREE.AmbientLight( 0xffffff ); // soft white light
+    var light = new THREE.AmbientLight( 0xffffff );
     scene.add(light);
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -21,7 +21,7 @@ function init() {
     document.body.appendChild( renderer.domElement );
 
     var loader = new THREE.JSONLoader();
-    loader.load('./models/ant/ant.json', 
+    loader.load('./models/eyeball/eyeball.json', 
 
         function(geometry, materials) {
             mesh = new THREE.Mesh(geometry, materials);

@@ -11,8 +11,12 @@ animate();
 
 function init() {
 
-    camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 0.01, 1000 );
-    camera.position.set(0, 10, 0);
+    var container = document.getElementById("test");
+    var canv = document.getElementById("canvas1");
+
+    //camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 0.1, 10 );
+    camera = new THREE.PerspectiveCamera( 100, container.clientWidth / 300, 0.1, 1000);
+    camera.position.set(0, 0, 0);
 
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0x333333 );
@@ -20,13 +24,19 @@ function init() {
     var light = new THREE.AmbientLight( 0xffffff ); // soft white light
     scene.add(light);
 
-    renderer = new THREE.WebGLRenderer( { antialias: true } );
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    //renderer = new THREE.WebGLRenderer( { antialias: true } );
+    //renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer = new THREE.WebGLRenderer({ canvas: canv });
+    renderer.setSize( container.clientWidth, 300 );
 
     // Add OrbitControls so that we can pan around with the mouse.
     controls = new THREE.OrbitControls(camera);
 
-    document.body.appendChild(renderer.domElement);
+    container.appendChild(renderer.domElement);
+    //document.body.appendChild(renderer.domElement);
+
+    console.log(container.clientWidth);
+    console.log(container.clientHeight);
 
     var loader = new THREE.JSONLoader();
     loader.load('./models/ant/ant.json', 
