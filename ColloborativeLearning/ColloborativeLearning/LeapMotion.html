@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<script src="//js.leapmotion.com/leap-0.6.3.js"></script>
+<h2>Hello Leap Motion</h2>
+<div id="output"></div>
+<script>
+    function concatData(id, data)
+    {
+        return id + ": " + data + "<br/>";
+    }
+    var output = document.getElementById('output');
+    var frameString = "";
+    var handString = "";
+    var fingeString = "";
+    var hand;
+    var finger;
+
+    var options = { enableGestures: true };
+    var controller=Leap.loop(options, function (frame) {
+
+        frameString=concatData('frame_id', frame.id);
+        frameString += concatData('numHands', frame.hands.length);
+        frameString += concatData('num fingers', frame.fingers.length);
+        frameString += '<br/>';
+
+        for (var i = 0, len = frame.hands.length; i < len; i++)
+        {
+            var hand = frame.hands[i];
+            //console.log(hand);
+            frameString += concatData('hand type', hand.type);
+            var fingers = frame.hands[i].fingers;
+            console.log(fingers);
+            console.log(hand.indexFinger);
+
+        }
+        
+
+        /*if (frame.valid && frame.gestures.length > 0) {
+            frame.gestures.forEach(function (gesture) {
+                switch (gesture.type) {
+                    case "circle":
+                        console.log("Circle Gesture");
+                        break;
+                    case "keyTap":
+                        console.log("Key Tap Gesture");
+                        break;
+                    case "screenTap":
+                        console.log("Screen Tap Gesture");
+                        break;
+                    case "swipe":
+                        console.log("Swipe Gesture");
+                        console.log(gesture.id);
+                        break;
+                }
+            });
+        }*/
+        output.innerHTML = frameString;
+
+    });
+    controller.on("gesture", function (gesture) {
+        //... handle gesture object
+        console.log('gesture object');
+        console.log(gesture.id);
+
+    });
+
+</script>
+</body>
+
+</html>
