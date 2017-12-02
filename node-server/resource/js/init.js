@@ -88,9 +88,9 @@ $('document').ready( function () {
         console.log("appending item:", element.item , " :: to position:", element.pos);
         $.ajax({url: '/resource/html/item'+element.item+'.html', success: function(result){
           $('#drop'+element.pos).append(result);
-          if(++dropCount<=3) {
+          /*if(++dropCount<=3) {
             $('#shown-item-list-row').append('<div class="col s4"><div class="row v-list-item">'+result+'</div></div>');
-          }
+          }*/
           sharedObjCount++;
         }});
       });
