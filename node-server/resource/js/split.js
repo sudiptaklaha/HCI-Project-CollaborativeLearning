@@ -9,13 +9,22 @@ var models=['ant', '12oz', 'eyeball', 'pocky'];
 var model_no = 0;
 
 init();
+load_model(0);
 animate();
 setInterval(function() {
     $.ajax({url: '/get3D', success: function(result){
         console.log("model_no", result);
         if(model_no!=result) {
             model_no=result;
-            init();
+
+            // Remove previous model
+            scene.remove(mesh_top);
+            scene.remove(mesh_bottom);
+            scene.remove(mesh_left);
+            scene.remove(mesh_right);
+
+            // Load the new model
+            load_model(result);
         }
     }});
 }, 2000);
@@ -38,9 +47,11 @@ function init() {
 
     // Add OrbitControls so that we can pan around with the mouse.
     controls = new THREE.OrbitControls(camera);
+}
 
+function load_model(model) {
     var loader = new THREE.JSONLoader();
-    loader.load('../models/'+models[model_no]+'/'+models[model_no]+'.json', 
+    loader.load('../models/'+models[model]+'/'+models[model]+'.json', 
 
         function(geometry, materials) {
             mesh = new THREE.Mesh(geometry, materials);
