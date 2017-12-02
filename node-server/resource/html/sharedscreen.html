@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Collaborative Learning</title>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <nav class="teal lighten-2">
+        <div class="container"><a id="logo-container" href="#" class="brand-logo">GROUP<i class="material-icons large right" style="font-size: 1.6em; margin-left:0">looks_6</i></a>
+            <ul class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons large" style="font-size: 3em; margin-left:0">power_settings_new</i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="section no-pad-bot" id="top-container">
+        <div class="container z-depth-1" style="height:80vh">
+            <div class="row ls-row">
+                <div class="col s4" id="drop1" ondrop="drop(event)" ondragover="allowDrop(event)" index="1"></div>
+                <div class="col s4" id="drop2" ondrop="drop(event)" ondragover="allowDrop(event)" index="2"></div>
+                <div class="col s4" id="drop3" ondrop="drop(event)" ondragover="allowDrop(event)" index="3"></div>
+            </div>
+            <div class="row ls-row">
+                <div class="col s4" id="drop4" ondrop="drop(event)" ondragover="allowDrop(event)" index="4"></div>
+                <div class="col s4" id="drop5" ondrop="drop(event)" ondragover="allowDrop(event)" index="5"></div>
+                <div class="col s4" id="drop6" ondrop="drop(event)" ondragover="allowDrop(event)" index="6"></div>
+            </div>
+            <div class="row ls-row">
+                <div class="col s4" id="drop7" ondrop="drop(event)" ondragover="allowDrop(event)" index="7"></div>
+                <div class="col s4" id="drop8" ondrop="drop(event)" ondragover="allowDrop(event)" index="8"></div>
+                <div class="col s4" id="drop9" ondrop="drop(event)" ondragover="allowDrop(event)" index="9"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var sharedObjCount=0;
+        $('document').ready(function() {
+            setInterval(function() {
+            $.ajax({url: '/refresh?'+sharedObjCount, success: function(result){      
+                result.forEach(function(element) {
+                console.log("appending item:", element.item , " :: to position:", element.pos);
+                $.ajax({url: '/resource/html/item'+element.item+'.html', success: function(result){
+                    $('#drop'+element.pos).append(result);
+                    sharedObjCount++;
+                }});
+            });
+            }});
+        }, 1000);
+    });
+    </script>
+</body>
+</html>

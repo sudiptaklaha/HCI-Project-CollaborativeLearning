@@ -1,0 +1,80 @@
+.no-margin-container {
+  width: 90%;
+  /*margin: initial;*/
+}
+.list-item {  
+  width: 100%;
+  cursor: pointer;
+}
+.v-list-item {
+  width: 100%;
+  cursor: pointer;
+}
+
+.container .row {
+  width: 100%;
+  margin-left: 0rem;
+  margin-right: 0rem;
+}
+/*.locallistcontainer {
+  padding-top: .01 em;
+}*/
+.localheader {
+  text-align: center;
+  color: white;
+  padding-top: .5em;
+  padding-bottom: .5em;
+  padding-left: 15%; 
+  /*padding: 2em auto 2em auto;
+  background-color: #4CAF50;*/
+}
+
+/*.locallistcontainer {
+  height: 100vh;
+}
+.large-screen {
+  height: 58vh;
+}
+.large-screen-items {
+  height: 21vh;
+}*/
+#right-container {
+  height: 100vh;
+}
+#large-screen-row {
+  height: 53%;
+}
+#large-screen-items-row {
+  height: 25%;
+}
+.large-screen {
+  height: 100%;
+  padding-top: 1em;
+}
+.large-screen-items {
+  height: 100%;
+  padding-top: 2em;
+}
+.row .col .localheadercol{
+  padding-left: 0;
+  padding-right: 0;
+}
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.do-inline {
+  display:inline-block;
+}
+.ls-row {
+  height:30%;
+}
+.large-screen .col {
+  height: 100%;
+}
+.item-text {
+  margin:0px 0px 5px 0
+}
