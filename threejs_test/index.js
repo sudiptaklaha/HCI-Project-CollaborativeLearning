@@ -4,6 +4,9 @@ var geometry, material, mesh;
 init();
 animate();
 
+rotateVert = 0
+rotateHor  = 0
+
 function init() {
 
     camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 0.01, 1000 );
@@ -42,21 +45,54 @@ function init() {
 
     // Add OrbitControls so that we can pan around with the mouse.
     controls = new THREE.OrbitControls(camera);
+
     
+}
+
+function rotate(direction){
+
+    switch(direction)
+    {
+        case "right":
+            rotateHor = -1.0;
+            rotateVert = 0;
+            break;
+
+        case "left":
+            rotateHor = 1.0;
+            rotateVert = 0;
+            break;
+
+        case "up":
+            rotateVert = -1.0;
+            rotateHor = 0;
+            break;
+
+        case "down":
+            rotateVert = 1.0;
+            rotateHor = 0;
+            break;
+        case "stop":
+            rotateVert = 0;
+            rotateHor = 0;
+            break;
+    }
 }
 
 function animate() {
 
     requestAnimationFrame( animate );
 
-    /*
+    
     if (mesh) {
-	    mesh.rotation.x -= 0.01;
-	    mesh.rotation.y -= 0.01;
-	    mesh.rotation.z += 0.01;
+	    mesh.rotation.x += 0.03 * rotateVert;
+
+	   // mesh.rotation.y -= 0.01;
+	    mesh.rotation.z += 0.03 * rotateHor;
 	}
-    */
+    
 
     renderer.render( scene, camera );
     controls.update();
 }
+
