@@ -59,6 +59,10 @@ var width = window.innerWidth;
     var normalizedIndexPosition;
     var elementToMove;
     var fistStrength;
+    var fingerCheck;
+    var prevZoomLevel = 0;
+    var rotationActivate = false;
+    var zoomingActivate = false;
 
     var options = { enableGestures: true };
 
@@ -111,13 +115,46 @@ var width = window.innerWidth;
                             console.log('id is: ' + id);
                             d3.select(id).attr('x', width * normalizedIndexPosition[0])
                             .attr('y', height * (1 - normalizedIndexPosition[1]));
-                        }
-                        
+                        }  
                     }
-                });
-                checkFist(frame.hands[i]);              
+
+
+                }); 
+                //zoom
+                var extendedFingers = 0;
+                for(var f = 0; f < frame.hands[i].fingers.length; f++){
+                    var finger = frame.hands[i].fingers[f];
+                    if(finger.extended) extendedFingers++;
+                }
+                if(!rotationActivate &&extendedFingers < 3)
+                {
+                    console.log("zoom");
+
+                    if(prevZoomLevel == 0)
+                        prevZoomLevel = palmPosition[1];
+
+                    if(prevZoomLevel + 0.2 < palmPosition[1])
+                    {
+                        zoom("in");
+                        console.log("zoom in"); 
+                    }
+                    if(prevZoomLevel - 0.2 > palmPosition[1])
+                    {
+                        zoom("out");
+                        console.log("zoom out"); 
+                    }
+
+                    zoomingActivate = true;
+                }
+                else
+                {
+                    zoom("stop");
+                    zoomingActivate =false;
+                }
+                detectFist(frame.hands[i]);                      
             }
         }
+
         if (frame.valid && frame.gestures.length > 0) {
             frame.gestures.forEach(function (gesture) {
                 switch (gesture.type) {
@@ -125,19 +162,7 @@ var width = window.innerWidth;
                         console.log("Circle Gesture");
                         break;
                     case "keyTap":
-                        // console.log("Key Tap Gesture");
-                        // console.log('is Moving Enabled' + isMovingEnabled);
-                        // if (isMovingEnabled==0)
-                        // {
 
-                        //     elementToMove = document.elementFromPoint(width * normalizedIndexPosition[0], height * (1 - normalizedIndexPosition[1]));
-                        //     isMovingEnabled = 1;
-                        // }
-                        // else if (isMovingEnabled==1)
-                        // {
-                        //     isMovingEnabled = 0;
-                        // }
-                        // console.log('Is Moving Enabled' + isMovingEnabled);
                         break;
                     case "screenTap":
                         console.log("Screen Tap Gesture");
@@ -170,10 +195,13 @@ var width = window.innerWidth;
                         fistStrength = availableHand.GrabStrength;
 
                         //threejs_index.js
-                        rotate(swipeDirection) //gesture.speed);
+                        if(!zoomingActivate)
+                        {
+                            rotate(swipeDirection); //gesture.speed);
+                            rotationActivate = true;
+                        }
+                        zoom("stop");
 
-                        //d3.select("#text3")
-                        //.text(concatData('Swipe speed', gesture.speed));
                         break;
                 }
             });
@@ -181,7 +209,7 @@ var width = window.innerWidth;
         
     });
 
-    function checkFist(hand){
+    function detectFist(hand){
        var sum = 0;
        for(var i=0;i<hand.fingers.length;i++){
           var finger = hand.fingers[i];
@@ -198,10 +226,14 @@ var width = window.innerWidth;
        if(sum<=0.5 && getExtendedFingers(hand)==0){
            console.log("stop");
            rotate("stop");
+           zoom("stop");
+           rotationActivate = false;
+           zoomingActivate = false;
        }else{
            return false;
        }
     }
+
     function getExtendedFingers(hand){
        var f = 0;
        for(var i=0;i<hand.fingers.length;i++){
@@ -211,3 +243,5 @@ var width = window.innerWidth;
        }
        return f;
     }
+
+    
