@@ -35,7 +35,8 @@ function postToServer(data, ev) {
   }});
 }
 
-$('document').ready( function () {  
+$('document').ready( function () {
+  
   $('.ls-row>.col').on('dragover',function() {
     $( this ).addClass("teal lighten-5 pulse");
     $('.ls-row>.col').addClass("z-depth-1");
