@@ -21,10 +21,12 @@ setInterval(function() {
             model_no=result;
 
             // Remove previous model
-            scene.remove(mesh_top);
-            scene.remove(mesh_bottom);
-            scene.remove(mesh_left);
-            scene.remove(mesh_right);
+            if (mesh) {
+                scene.remove(mesh_top);
+                scene.remove(mesh_bottom);
+                scene.remove(mesh_left);
+                scene.remove(mesh_right);
+            }
 
             // Load the new model
             load_model(result);
@@ -75,7 +77,7 @@ function load_model(model) {
                 mesh.position.y * scale_bottom.y, 
                 mesh.position.z * scale_bottom.z
             );
-            mesh_bottom.scale.x = -1;
+            mesh_bottom.rotation.y = Math.PI;
             scene.add(mesh_bottom);
 
             mesh_left = mesh.clone();
@@ -162,9 +164,9 @@ function animate() {
     var rotationalVector = new THREE.Vector3(0.01, 0.01, 0.01);
 
     if (mesh) {
-	    mesh_top.rotation.x += rotationalVector.x * rotateVert;
-	    //mesh_top.rotation.y += rotationalVector.y * scale_top.y * zoomScale;
-	    mesh_top.rotation.z += rotationalVector.z * rotateHor;
+        mesh_top.rotation.x += rotationalVector.x * rotateVert;
+        //mesh_top.rotation.y += rotationalVector.y * scale_top.y * zoomScale;
+        mesh_top.rotation.z += rotationalVector.z * rotateHor;
 
         mesh_bottom.rotation.x += rotationalVector.x * rotateVert;
         //mesh_bottom.rotation.y += rotationalVector.y * scale_bottom.y * zoomScale;
@@ -183,7 +185,7 @@ function animate() {
         mesh_left.position.y += rotationalVector.y * 3 * zoomScale;
         mesh_right.position.y += rotationalVector.y * 3 * zoomScale;
 
-	}
+    }
 
     renderer.render( scene, camera );
     //controls.update();
