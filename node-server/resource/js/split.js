@@ -11,6 +11,11 @@ var rotateVert = 0;
 var rotateHor  = 0;
 var zoomScale = 0;
 
+var rotObjectMatrix;
+var xAxis = new THREE.Vector3(1,0,0);
+var yAxis = new THREE.Vector3(0,1,0);
+var zAxis = new THREE.Vector3(0,0,1);
+
 init();
 load_model(0);
 animate();
@@ -62,6 +67,7 @@ function load_model(model) {
             mesh = new THREE.Mesh(geometry, materials);
             mesh.position.set(10, 10, 10);
             //scene.add(mesh);
+            
 
             mesh_top = mesh.clone();
             mesh_top.position.set(
@@ -86,7 +92,8 @@ function load_model(model) {
                 mesh.position.y * scale_left.y, 
                 mesh.position.z * scale_left.z
             ); 
-            mesh_left.rotation.y = Math.PI / 2;
+
+            rotateOnObjectAxis(mesh_left, yAxis, Math.PI/2);
             scene.add(mesh_left);
 
             mesh_right = mesh.clone();
@@ -95,7 +102,7 @@ function load_model(model) {
                 mesh.position.y * scale_right.y, 
                 mesh.position.z * scale_right.z
             );
-            mesh_right.rotation.y = - Math.PI / 2;
+            rotateOnObjectAxis(mesh_right, yAxis, -Math.PI/2);
             scene.add(mesh_right);
         },
 
@@ -165,20 +172,18 @@ function animate() {
 
     if (mesh) {
         mesh_top.rotation.x += rotationalVector.x * rotateVert;
-        //mesh_top.rotation.y += rotationalVector.y * scale_top.y * zoomScale;
         mesh_top.rotation.z += rotationalVector.z * rotateHor;
 
         mesh_bottom.rotation.x += rotationalVector.x * rotateVert;
-        //mesh_bottom.rotation.y += rotationalVector.y * scale_bottom.y * zoomScale;
         mesh_bottom.rotation.z += rotationalVector.z * rotateHor;
 
-        mesh_left.rotation.x += rotationalVector.x * rotateVert;
-        //mesh_left.rotation.y += rotationalVector.y * scale_left.y * zoomScale;
-        mesh_left.rotation.z += rotationalVector.z * rotateHor;
+        rotateOnObjectAxis(mesh_left, xAxis, rotationalVector.x * rotateVert);
+        rotateOnObjectAxis(mesh_left, zAxis, rotationalVector.z * rotateHor);
 
-        mesh_right.rotation.x += rotationalVector.x * rotateVert;
-        //mesh_right.rotation.y += rotationalVector.y * scale_right.y * zoomScale;
-        mesh_right.rotation.z += rotationalVector.z * rotateHor;
+        rotateOnObjectAxis(mesh_right, xAxis, rotationalVector.x * rotateVert);
+        rotateOnObjectAxis(mesh_right, zAxis, rotationalVector.z * rotateHor);
+        //mesh_right.rotation.x += rotationalVector.x * rotateVert;
+        //mesh_right.rotation.z += rotationalVector.z * rotateHor;
 
         mesh_top.position.y += rotationalVector.y * 3 * zoomScale;
         mesh_bottom.position.y += rotationalVector.y * 3 * zoomScale;
@@ -189,4 +194,11 @@ function animate() {
 
     renderer.render( scene, camera );
     //controls.update();
+}
+
+function rotateOnObjectAxis(object, axis, radians) {
+    objectMatrix = new THREE.Matrix4();
+    objectMatrix.makeRotationAxis(axis.normalize(), radians);
+    object.matrix.multiply(objectMatrix);
+    object.rotation.setFromRotationMatrix(object.matrix);
 }
