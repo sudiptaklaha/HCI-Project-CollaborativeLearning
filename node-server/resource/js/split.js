@@ -143,15 +143,15 @@ function zoom(direction){
     switch(direction)
     {
         case "in":
-            scale = 1.0;
+            zoomScale = 1.0;
             break;
 
         case "out":
-            scale = -1.0;
+            zoomScale = -1.0;
             break;
 
         case "stop":
-            scale = 0;
+            zoomScale = 0;
             break;
     }
 }
@@ -162,21 +162,27 @@ function animate() {
     var rotationalVector = new THREE.Vector3(0.01, 0.01, 0.01);
 
     if (mesh) {
-	    mesh_top.rotation.x += rotationalVector.x * scale_top.x * rotateVert;
-	    mesh_top.rotation.y += rotationalVector.y * scale_top.y * zoomScale;
-	    mesh_top.rotation.z += rotationalVector.z * scale_top.z * rotateHor;
+	    mesh_top.rotation.x += rotationalVector.x * rotateVert;
+	    //mesh_top.rotation.y += rotationalVector.y * scale_top.y * zoomScale;
+	    mesh_top.rotation.z += rotationalVector.z * rotateHor;
 
-        mesh_bottom.rotation.x += rotationalVector.x * scale_bottom.x * rotateVert;
-        mesh_bottom.rotation.y += rotationalVector.y * scale_bottom.y * zoomScale;
-        mesh_bottom.rotation.z += rotationalVector.z * scale_bottom.z * rotateHor;
+        mesh_bottom.rotation.x += rotationalVector.x * rotateVert;
+        //mesh_bottom.rotation.y += rotationalVector.y * scale_bottom.y * zoomScale;
+        mesh_bottom.rotation.z += rotationalVector.z * rotateHor;
 
-        mesh_left.rotation.x += rotationalVector.x * scale_left.x * rotateVert;
-        mesh_left.rotation.y += rotationalVector.y * scale_left.y * zoomScale;
-        mesh_left.rotation.z += rotationalVector.z * scale_left.z * rotateHor;
+        mesh_left.rotation.x += rotationalVector.x * rotateVert;
+        //mesh_left.rotation.y += rotationalVector.y * scale_left.y * zoomScale;
+        mesh_left.rotation.z += rotationalVector.z * rotateHor;
 
-        mesh_right.rotation.x += rotationalVector.x * scale_right.x * rotateVert;
-        mesh_right.rotation.y += rotationalVector.y * scale_right.y * zoomScale;
-        mesh_right.rotation.z += rotationalVector.z * scale_right.z * rotateHor;
+        mesh_right.rotation.x += rotationalVector.x * rotateVert;
+        //mesh_right.rotation.y += rotationalVector.y * scale_right.y * zoomScale;
+        mesh_right.rotation.z += rotationalVector.z * rotateHor;
+
+        mesh_top.position.y += rotationalVector.y * 3 * zoomScale;
+        mesh_bottom.position.y += rotationalVector.y * 3 * zoomScale;
+        mesh_left.position.y += rotationalVector.y * 3 * zoomScale;
+        mesh_right.position.y += rotationalVector.y * 3 * zoomScale;
+
 	}
 
     renderer.render( scene, camera );
