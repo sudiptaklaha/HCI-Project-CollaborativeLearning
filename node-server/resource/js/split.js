@@ -35,7 +35,7 @@ function init() {
     camera.position.set(0, 10, 0);
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0xdddddd );
+    scene.background = new THREE.Color( 0x000000 );
 
     var light = new THREE.AmbientLight( 0xffffff ); // soft white light
     scene.add(light);
@@ -55,7 +55,7 @@ function load_model(model) {
 
         function(geometry, materials) {
             mesh = new THREE.Mesh(geometry, materials);
-            mesh.position.set(3, 3, 3);
+            mesh.position.set(10, 10, 10);
             //scene.add(mesh);
 
             mesh_top = mesh.clone();
