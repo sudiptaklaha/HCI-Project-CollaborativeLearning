@@ -4,8 +4,9 @@ var geometry, material, mesh;
 init();
 animate();
 
-rotateVert = 0
-rotateHor  = 0
+rotateVert = 0;
+rotateHor  = 0;
+scale = 0;
 
 function init() {
 
@@ -24,8 +25,7 @@ function init() {
     document.body.appendChild( renderer.domElement );
 
     var loader = new THREE.JSONLoader();
-    loader.load('./models/eyeball/eyeball.json', 
-
+    loader.load('./models/pocky/pocky.json', 
         function(geometry, materials) {
             mesh = new THREE.Mesh(geometry, materials);
             mesh.position.set(0, 0, 0);
@@ -79,20 +79,40 @@ function rotate(direction){
     }
 }
 
+function zoom(direction){
+    switch(direction)
+    {
+        case "in":
+            scale = 1.0;
+            break;
+
+        case "out":
+            scale = -1.0;
+            break;
+
+        case "stop":
+            scale = 0;
+            break;
+    }
+}
+
 function animate() {
 
     requestAnimationFrame( animate );
 
     
     if (mesh) {
-	    mesh.rotation.x += 0.03 * rotateVert;
-
-	   // mesh.rotation.y -= 0.01;
+	    //rotate
+        mesh.rotation.x += 0.03 * rotateVert;
 	    mesh.rotation.z += 0.03 * rotateHor;
+
+        //zoom
+        mesh.position.y += 0.03 * scale;
 	}
     
 
     renderer.render( scene, camera );
     controls.update();
 }
+
 
