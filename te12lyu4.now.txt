@@ -1,0 +1,36 @@
+﻿Merge branch 'master' of https://github.com/sudiptaklaha/HCI-Project-CollaborativeLearning
+
+# Conflicts:
+#	node-server/resource/html/item1details.html
+#	node-server/resource/html/item2details.html
+#	node-server/resource/html/item3details.html
+#	node-server/resource/html/item4details.html
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 5 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   node-server/resource/js/split.js
+#
+# Changes not staged for commit:
+#	modified:   node-server/resource/models/12oz/Blank_Custom_Maps/Thumbs.db
+#
+# Untracked files:
+#	node-server/resource/models/12oz/Thumbs.db
+#	node-server/resource/models/ant/Thumbs.db
+#	threejs_test/models/ant/Thumbs.db
+#	threejs_test/models/eyeball/Thumbs.db
+#
+
