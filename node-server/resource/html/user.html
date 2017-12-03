@@ -13,12 +13,7 @@
   <script src="../js/materialize.min.js"></script>
 </head>
 <body>
-<<<<<<< HEAD
-  <nav class="teal lighten-2">
-    <div class="container"><a id="logo-container" href="#" class="brand-logo">HoloCL - Group<i class="material-icons large right" style="font-size: 1.6em; margin-left:0">looks_6</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#"><i class="material-icons large" style="font-size: 3em; margin-left:0">power_settings_new</i></a></li>
-=======
+
   <!-- NAV BAR -->
   <nav class="teal lighten-2 nav-wrapper">
     <div class="nav-wrapper"-->
@@ -29,130 +24,106 @@
         <li class="active"><a href="user.html">Client Screen</a></li>
         <li><a href="sharedscreen.html">Shared Screen</a></li>
         <li><a href="projector.html">Projector</a></li>
->>>>>>> a8865ccc3ec43a11085f2d640d469f5e07c3b6d1
       </ul>
     </div>
   </nav>
   <!-- END NAV BAR -->
 
   <!-- MAIN CONTENT -->
-  <div class="section no-pad-bot" id="top-container">
-      <div class="row">
+  <div class="row">
 
-        <!-- LOCAL LIST -->
-        <div class="col s3 container z-depth-2 left-container" style="margin-left: 0px; min-height:85vh;">
-
-          <!-- LOCAL LIST'S HEADER -->
-          <div class="row">
-            <!--div class="localheadercol"-->
-              <div class="localheader teal lighten-2 center"><h5>Local List</h5></div>
-            <!--/div-->
-          </div>
-          <!-- END LOCAL LIST'S HEADER -->
-
-          <!-- LOCAL LIST item1 -->
-          <div id ="item1" class="row list-item" draggable="true" ondragstart="drag(event)">
-            <div class="col s12" index="1">
-                <div class="row z-depth-1 hoverable">
-                  <div class="col s4"><img class="responsive-img" src="../images/ant.png"></div>
-                  <div class="col s8 item-text"><span><b>Ant Model</b></br>This is a model of an ant.</span></div>
-                </div>
+    <!-- LOCAL LIST -->
+    <div class="col s3 z-depth-1" style="min-height: 90vh; padding: auto;">
+      <!-- HEADER -->
+      <div class="teal lighten-2 center"><h5>Local List</h5></div>
+      
+      <!-- ITEM LIST -->
+      <!-- LOCAL LIST item1 -->
+      <div id ="item1" class="row list-item" draggable="true" ondragstart="drag(event)">
+        <div class="col s12" index="1">
+            <div class="row z-depth-1 hoverable">
+              <div class="col s4"><img class="responsive-img" src="../images/ant.png"></div>
+              <div class="col s8 item-text"><span><b>Ant Model</b></br>This is a model of an ant.</span></div>
             </div>
-          </div>
-          <!-- LOCAL LIST item1 ENDS -->
-
-          <!-- LOCAL LIST  item2-->
-          <div class="row list-item" draggable="true" ondragstart="drag(event)">
-            <div class="col s12" index="2">
-                <div class="row z-depth-1 hoverable">
-                  <div class="col s4"><img class="responsive-img" src="../images/12oz.png"></div>
-                  <div class="col s8 item-text"><span><b>12oz Model</b></br>This 12oz model is really great.</span></div>
-                </div>
-            </div>
-          </div>
-          <!-- LOCAL LIST  item2 ends -->
-          
-          <!-- LOCAL LIST  item3 -->
-          <div class="row list-item" draggable="true" ondragstart="drag(event)">
-            <div class="col s12" index="3">
-                <div class="row z-depth-1 hoverable">
-                  <div class="col s4"><img class="responsive-img" src="../images/eyeball.png"></div>
-                  <div class="col s8 item-text"><span><b>Eyeball Model</b></br>This model shows an eyeball which is huge.</span></div>
-                </div>
-            </div>
-          </div>
-          <!-- LOCAL LIST  item3 ends -->
-
-          <!-- LOCAL LIST  item4 -->
-          <div class="row list-item" draggable="true" ondragstart="drag(event)">
-            <div class="col s12" index="4">
-                <div class="row z-depth-1 hoverable">
-                  <div class="col s4"><img class="responsive-img" src="../images/pocky.png"></div>
-                  <div class="col s8 item-text"><span><b>Pocky Model</b></br>This is a valuable model of a great snack.</span></div>
-                </div>
-            </div>
-          </div>
-          <!-- LOCAL LIST  item4 ends -->
-
-          <!-- DROPDOWN STRUCTURE -->
-          <ul id="dropdown" class="dropdown-content" style="display: none; width: 300px; position: absolute; opacity: 1">                        
-            <li><a href="#!" id="menuitem1"><i class="material-icons">delete_forever</i>Delete item</a></li>
-            <li class="divider"></li>
-            <li><a href="#!" id="menuitem2"><i class="material-icons">3d_rotation</i>Show in 3D</a></li>
-            <li class="divider"></li>
-            <li><a href="#!" id="menuitem3"><i class="material-icons">screen_share</i>Add to shared screen</a></li>
-          </ul>
-          <!-- DROPDOWN STRUCTURE ENDS -->
-
         </div>
-        <!-- END LOCAL LIST -->
-
-        <!-- SHARED SCREEN -->
-        <div class="col s9">
-          <div class="container" id="right-container" style="max-height:85vh;">
-
-              <!--div class="row">
-                <div class="col s12 localheadercol">                
-                  <div class="localheader z-depth-1 teal lighten-2 valign-wrapper"><h5>Local List</h5></div>
-                </div>
-              </div-->
-
-              <!-- SHARED SCREEN DISPLAY -->
-              <div class="large-screen z-depth-2">
-                <div class="row ls-row list-item">
-                  <div class="col s4" id="drop1" ondrop="drop(event)" ondragover="allowDrop(event)" index="1"></div>
-                  <div class="col s4" id="drop2" ondrop="drop(event)" ondragover="allowDrop(event)" index="2"></div>
-                  <div class="col s4" id="drop3" ondrop="drop(event)" ondragover="allowDrop(event)" index="3"></div>
-                </div>
-                <div class="row ls-row">
-                  <div class="col s4" id="drop4" ondrop="drop(event)" ondragover="allowDrop(event)" index="4"></div>
-                  <div class="col s4" id="drop5" ondrop="drop(event)" ondragover="allowDrop(event)" index="5"></div>
-                  <div class="col s4" id="drop6" ondrop="drop(event)" ondragover="allowDrop(event)" index="6"></div>
-                </div>
-                <div class="row ls-row list-item">
-                  <div class="col s4" id="drop7" ondrop="drop(event)" ondragover="allowDrop(event)" index="7"></div>
-                  <div class="col s4" id="drop8" ondrop="drop(event)" ondragover="allowDrop(event)" index="8"></div>
-                  <div class="col s4" id="drop9" ondrop="drop(event)" ondragover="allowDrop(event)" index="9"></div>
-                </div>
-<<<<<<< HEAD
-                </div>
-            <!--</div>-->
-            <!--<div class="row" id="large-screen-items-row">-->
-              <!-- shared items -->
-              <!--<div class="large-screen-items z-depth-2">
-                <div class="row" id="shown-item-list-row"></div>
-              </div>-->
-            <!--</div>-->
-=======
-              </div>
-              <!-- SHARED SCREEN DISPLAY ENDS -->
-
->>>>>>> a8865ccc3ec43a11085f2d640d469f5e07c3b6d1
-          </div>
-        </div>
-        <!-- END SHARED SCREEN -->
       </div>
+      <!-- END LOCAL LIST item1 -->
+
+      <!-- LOCAL LIST item2 -->
+      <div id ="item1" class="row list-item" draggable="true" ondragstart="drag(event)">
+        <div class="col s12" index="2">
+            <div class="row z-depth-1 hoverable">
+              <div class="col s4"><img class="responsive-img" src="../images/12oz.png"></div>
+              <div class="col s8 item-text"><span><b>12oz Model</b></br>This 12oz model is really great.</span></div>
+            </div>
+        </div>
+      </div>
+      <!-- END LOCAL LIST item2 -->
+
+      <!-- LOCAL LIST item3 -->
+      <div id ="item1" class="row list-item" draggable="true" ondragstart="drag(event)">
+        <div class="col s12" index="3">
+            <div class="row z-depth-1 hoverable">
+              <div class="col s4"><img class="responsive-img" src="../images/eyeball.png"></div>
+              <div class="col s8 item-text"><span><b>Eyeball Model</b></br>This model shows an eyeball which is huge.</span></div>
+            </div>
+        </div>
+      </div>
+      <!-- END LOCAL LIST item3 -->
+
+      <!-- LOCAL LIST item4 -->
+      <div id ="item1" class="row list-item" draggable="true" ondragstart="drag(event)">
+        <div class="col s12" index="4">
+            <div class="row z-depth-1 hoverable">
+              <div class="col s4"><img class="responsive-img" src="../images/pocky.png"></div>
+              <div class="col s8 item-text"><span><b>Pocky Model</b></br>This is a valuable model of a great snack.</span></div>
+            </div>
+        </div>
+      </div>
+      <!-- END LOCAL LIST item4 -->
+
+      <!-- DROPDOWN STRUCTURE -->
+      <ul id="dropdown" class="dropdown-content" style="display: none; width: 300px; position: absolute; opacity: 1">                        
+        <li><a href="#!" id="menuitem1"><i class="material-icons">delete_forever</i>Delete item</a></li>
+        <li class="divider"></li>
+        <li><a href="#!" id="menuitem2"><i class="material-icons">3d_rotation</i>Show in 3D</a></li>
+        <li class="divider"></li>
+        <li><a href="#!" id="menuitem3"><i class="material-icons">screen_share</i>Add to shared screen</a></li>
+      </ul>
+      <!-- END DROPDOWN STRUCTURE -->
+
+    </div>
+    <!-- END LOCAL LIST -->
+
+    <div class="col s9" style="height: 90vh; padding: auto;">
+      <div class="container" id="right-container" style="height:85vh; padding: auto; width: 100%;">
+        <!-- HEADER -->
+        <div class="teal lighten-2 center"><h5>Shared List</h5></div>
+
+        <!-- SHARED SCREEN DISPLAY -->
+        <div class="large-screen z-depth-2" style="height: 83vh; padding: auto;">
+          <div class="row ls-row">
+            <div class="col s4" id="drop1" ondrop="drop(event)" ondragover="allowDrop(event)" index="1"></div>
+            <div class="col s4" id="drop2" ondrop="drop(event)" ondragover="allowDrop(event)" index="2"></div>
+            <div class="col s4" id="drop3" ondrop="drop(event)" ondragover="allowDrop(event)" index="3"></div>
+          </div>
+          <div class="row ls-row">
+            <div class="col s4" id="drop4" ondrop="drop(event)" ondragover="allowDrop(event)" index="4"></div>
+            <div class="col s4" id="drop5" ondrop="drop(event)" ondragover="allowDrop(event)" index="5"></div>
+            <div class="col s4" id="drop6" ondrop="drop(event)" ondragover="allowDrop(event)" index="6"></div>
+          </div>
+          <div class="row ls-row">
+            <div class="col s4" id="drop7" ondrop="drop(event)" ondragover="allowDrop(event)" index="7"></div>
+            <div class="col s4" id="drop8" ondrop="drop(event)" ondragover="allowDrop(event)" index="8"></div>
+            <div class="col s4" id="drop9" ondrop="drop(event)" ondragover="allowDrop(event)" index="9"></div>
+          </div>
+        </div>
+        <!-- END SHARED SCREEN DISPLAY -->
+      </div>
+    </div>
+    <!-- END SHARED SCREEN -->
   </div>
+  <!-- END MAIN CONTENT -->
 
   <script src="../js/init.js"></script>
   </body>

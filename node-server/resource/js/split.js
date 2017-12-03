@@ -186,5 +186,5 @@ function animate() {
 	}
 
     renderer.render( scene, camera );
-    controls.update();
+    //controls.update();
 }
