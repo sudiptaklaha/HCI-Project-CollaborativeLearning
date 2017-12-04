@@ -1,28 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Collaborative Learning</title>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../js/materialize.min.js"></script>
+
+</head>
+<body>
 <script>
-	 var id;
+   var id;
      $(document).ready(function(){
      $('#carousel1').carousel({
-      	  /*onAfterChange: function(slide, index) {
-      	    
-      	    console.log('slide:' + slide);
-      	    console.log('Index:'+ index);
- 			
- 			    }*/
-      		onCycleTo: function(data)
-      		{
-      			console.log(data);
-      		}
+          onCycleTo: function(data)
+          {
+            console.log(data);
+          }
        });
+
+      $('#back').click(function() {
+      console.log('Inside click');
+          var abc="/resource/html/user.html";
+          console.log(abc);
+          window.location.pathname = abc;
+    });
+
     });
 
      /*function mouseup()
      {
-	     var abc=$('#carousel1>.active');
-    		var id=abc.attr('id');
-    		console.log('id item is:' + id);
-    		//str = JSON.stringify(abc);
-    		//console.log(str);
+       var abc=$('#carousel1>.active');
+        var id=abc.attr('id');
+        console.log('id item is:' + id);
+        //str = JSON.stringify(abc);
+        //console.log(str);
     }*/
+
 </script>
 <style>
 #container2 {
@@ -39,7 +56,7 @@
     font-family:Verdana,sans-serif;
 
 }
-h6
+h5
 {
     display: flex;
     justify-content:center;
@@ -54,11 +71,17 @@ h6
 }
 
 </style>
+
+<div class="row">
+  <div class="col s12">
+  <h5>Can Details Local View</h5>
+</div>
+</div>
 <div class="row">
 		<div class="col s2"> 
     </div>
 		<div class="col s8">
-    <div class="carousel" id="carousel1" style="background-color:rgb(255, 255, 255); opacity:1;">
+    <div class="carousel" id="carousel1" style="background-color:#333; opacity:1;">
 		<!--<div class="carousel" id="carousel1" style="background-color:#333; opacity:1;" onmouseup="mouseup();">-->
 				<a class="carousel-item" id="obj1" href="#one!"><img class="profile-image" src="../models/12oz/thumbnail.png" ></a>		
 				<a class="carousel-item" id="obj2" href="#two!"><img class="profile-image" src="../models/12oz/nakedcan2.jpg"></a>
@@ -71,7 +94,7 @@ h6
     <div class="col s2">
       <div class="row">
         <div class="col s12">
-          <button id="back" type="button" class="waves-effect waves-light btn" onclick="backClick()">Back</button>
+          <button id="back" type="button" class="waves-effect waves-light btn">Back</button>
         </div>
       </div>
     </div>
@@ -86,5 +109,6 @@ h6
 
 
 </div>
-<div class="row">
-</div>
+
+</body>
+</html>
