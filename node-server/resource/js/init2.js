@@ -1,11 +1,9 @@
 var dropCount = 0;
 var sharedObjCount = 0;
 var rightClickedItem = 0;
-
 var detailsObj = -1;
 var rightClickedElem;
 var sharedState = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0};
-
 
 function allowDrop(ev) {
   ev.preventDefault();
@@ -16,13 +14,14 @@ function drag(ev) {
   //$('.ls-row>.col').addClass("z-depth-1");
 }
 function drop(ev) {
+
   //console.log('dropped');
   
   ev.preventDefault();
   var data = ev.dataTransfer.getData('text/html');
+  //$(data).addClass('dropped');
   //ev.target.appendChild(data);
   $(ev.target).append(data);
-  
   $(ev.target).children(":first").addClass('dropped');
   var index = $(ev.target).children(":first").attr('index');//cursor: pointer;
   $(ev.target).children(":first").css('cursor','pointer');
@@ -41,12 +40,6 @@ function drop(ev) {
   $(ev.target).children(":first").on('click', function() {
     showDetails(index);
   });
-
-  /*if(++dropCount<=3) {
-    $('#shown-item-list-row').append('<div class="col s4"><div class="row v-list-item">'+data+'</div></div>');
-  }*/
-
-  //$('.ls-row>.col').removeClass("z-depth-1");
   $('.ls-row>.col').removeClass("teal lighten-5 pulse");
   sharedObjCount++;
   sharedState[$(ev.target).attr('index')] = 1;
@@ -88,7 +81,7 @@ $('document').ready( function () {
   });
   $('.list-item').on('dragend', function() {
     $('.ls-row>.col').removeClass("z-depth-1");
-  });
+  });  
 
   $('.list-item').contextmenu(function(e) {
     rightClickedElem = this;
@@ -177,20 +170,12 @@ $('document').ready( function () {
       $('#large-screen').html(result);
     }});
   });*/
-   $('#menuitem4').click(function() {
-    closeMenu();
-
-    var abc="/resource/html/item" + rightClickedItem+ "detailslocal.html";
-    console.log(abc);
-    window.location.pathname = abc;
-   
-  });
 
   setInterval(function() {
+    //console.log(sharedState);
     $.ajax({url: '/refresh?'+sharedObjCount, success: function(result){      
       result.forEach(function(element) {
         console.log("appending item:", element.item , " :: to position:", element.pos);
-
         if(element.pos==-1) {
           if(detailsObj!=element.item) {
             console.log("putting shared object");
