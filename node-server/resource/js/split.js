@@ -10,9 +10,18 @@ var model_no = 0;
 var rotateVert = 0;
 var rotateHor  = 0;
 var zoomScale = 0;
+var originalScale = 0;
+
+//demo
+var rotationSwitch = false;
+
+var rotObjectMatrix;
+var xAxis = new THREE.Vector3(1,0,0);
+var yAxis = new THREE.Vector3(0,1,0);
+var zAxis = new THREE.Vector3(0,0,1);
 
 init();
-load_model(0);
+load_model(1);
 animate();
 setInterval(function() {
     $.ajax({url: '/get3D', success: function(result){
@@ -60,8 +69,9 @@ function load_model(model) {
 
         function(geometry, materials) {
             mesh = new THREE.Mesh(geometry, materials);
-            mesh.position.set(10, 10, 10);
+            mesh.position.set(8, 8, 8);
             //scene.add(mesh);
+            
 
             mesh_top = mesh.clone();
             mesh_top.position.set(
@@ -86,7 +96,8 @@ function load_model(model) {
                 mesh.position.y * scale_left.y, 
                 mesh.position.z * scale_left.z
             ); 
-            mesh_left.rotation.y = Math.PI / 2;
+
+            rotateOnObjectAxis(mesh_left, yAxis, Math.PI/2);
             scene.add(mesh_left);
 
             mesh_right = mesh.clone();
@@ -95,7 +106,8 @@ function load_model(model) {
                 mesh.position.y * scale_right.y, 
                 mesh.position.z * scale_right.z
             );
-            mesh_right.rotation.y = - Math.PI / 2;
+            
+            rotateOnObjectAxis(mesh_right, yAxis, -Math.PI/2);
             scene.add(mesh_right);
         },
 
@@ -139,11 +151,17 @@ function rotate(direction){
             rotateHor = 0;
             break;
     }
+
+    //demo
+    rotationSwitch=true;
 }
 
 function zoom(direction){
-    switch(direction)
+    //demo
+    if(rotationSwitch ==true)
     {
+        switch(direction)
+        {
         case "in":
             zoomScale = 1.0;
             break;
@@ -155,38 +173,55 @@ function zoom(direction){
         case "stop":
             zoomScale = 0;
             break;
-    }
+        }
+    }       
 }
 function animate() {
 
     requestAnimationFrame( animate );
 
     var rotationalVector = new THREE.Vector3(0.01, 0.01, 0.01);
+    if(originalScale = 0)
+        originalScale = mesh_top.scale.x;
 
     if (mesh) {
         mesh_top.rotation.x += rotationalVector.x * rotateVert;
-        //mesh_top.rotation.y += rotationalVector.y * scale_top.y * zoomScale;
         mesh_top.rotation.z += rotationalVector.z * rotateHor;
 
-        mesh_bottom.rotation.x += rotationalVector.x * rotateVert;
-        //mesh_bottom.rotation.y += rotationalVector.y * scale_bottom.y * zoomScale;
+        mesh_bottom.rotation.x -= rotationalVector.x * rotateVert;
         mesh_bottom.rotation.z += rotationalVector.z * rotateHor;
 
-        mesh_left.rotation.x += rotationalVector.x * rotateVert;
-        //mesh_left.rotation.y += rotationalVector.y * scale_left.y * zoomScale;
-        mesh_left.rotation.z += rotationalVector.z * rotateHor;
+    
+        rotateOnObjectAxis(mesh_left, xAxis, rotationalVector.x * rotateVert);
+        rotateOnObjectAxis(mesh_left, zAxis, rotationalVector.z * rotateHor);
+        rotateOnObjectAxis(mesh_right, xAxis, rotationalVector.x * rotateVert);
+        rotateOnObjectAxis(mesh_right, zAxis, rotationalVector.z * rotateHor);
+        //mesh_left.rotation.x += rotationalVector.x * rotateHor;
+        //mesh_left.rotation.z += rotationalVector.z * rotateVert;
+        //mesh_right.rotation.x += rotationalVector.x * rotateHor;
+        //mesh_right.rotation.z += rotationalVector.z * rotateVert;
 
-        mesh_right.rotation.x += rotationalVector.x * rotateVert;
-        //mesh_right.rotation.y += rotationalVector.y * scale_right.y * zoomScale;
-        mesh_right.rotation.z += rotationalVector.z * rotateHor;
-
-        mesh_top.position.y += rotationalVector.y * 3 * zoomScale;
-        mesh_bottom.position.y += rotationalVector.y * 3 * zoomScale;
-        mesh_left.position.y += rotationalVector.y * 3 * zoomScale;
-        mesh_right.position.y += rotationalVector.y * 3 * zoomScale;
+        console.log(mesh_top.scale.x);
+        if(mesh_top.scale.x >=1)
+        {
+            if(mesh_top.scale.x +0.01 * zoomScale >=1)
+            {
+                mesh_top.scale.set(mesh_top.scale.x +0.01 * zoomScale, mesh_top.scale.y +0.01 * zoomScale, mesh_top.scale.z +0.01 * zoomScale);
+                mesh_bottom.scale.set(mesh_bottom.scale.x +0.01 * zoomScale, mesh_bottom.scale.y +0.01 * zoomScale, mesh_bottom.scale.z +0.01 * zoomScale);
+                mesh_left.scale.set(mesh_left.scale.x +0.01 * zoomScale, mesh_left.scale.y +0.01 * zoomScale, mesh_left.scale.z +0.01 * zoomScale);
+                mesh_right.scale.set(mesh_right.scale.x +0.01 * zoomScale, mesh_right.scale.y +0.01 * zoomScale, mesh_right.scale.z +0.01 * zoomScale);
+            }
+        }
 
     }
 
     renderer.render( scene, camera );
     //controls.update();
+}
+
+function rotateOnObjectAxis(object, axis, radians) {
+    objectMatrix = new THREE.Matrix4();
+    objectMatrix.makeRotationAxis(axis.normalize(), radians);
+    object.matrix.multiply(objectMatrix);
+    object.rotation.setFromRotationMatrix(object.matrix);
 }
