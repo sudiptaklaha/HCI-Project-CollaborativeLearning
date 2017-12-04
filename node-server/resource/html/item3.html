@@ -1,6 +1,20 @@
-<div class="col s12" index="3" onclick="showDetails(3)" style="cursor: pointer">
+<div class="col s12 dropped" index="3" onclick="showDetails(3)" style="cursor: pointer">
   <div class="row z-depth-1 hoverable">
     <div class="col s4"><img class="responsive-img" src="../images/eyeball.png"></div>
     <div class="col s8 item-text"><span><b>Eyeball Model</b></br>This model shows an eyeball which is huge.</span></div>
   </div>
 </div>
+<script>
+    $(".dropped").contextmenu(function(e) {
+      rightClickedElem = this;
+      rightClickedItem = $(this).attr('index');
+      console.log($(this), e.pageX,e.pageY);
+      $('#dropdown2').addClass('active');
+      $('#dropdown2').css({
+        'display': 'block',
+        'top':e.pageY-10,
+        'left':e.pageX-10
+      });
+      return false;
+    });
+  </script>
