@@ -6,10 +6,12 @@ var path = require("path");
 
 var shared=[];
 var hologram = 0;
+var detailsObj = -1;
+var detailsArr=[];
 
 http.createServer(function (req, res) {
 	var q = url.parse(req.url, true);
-	console.log(q.pathname);
+	//console.log(q.pathname);
 	//console.log(q.search);
 	var pathName = q.pathname;
 	if (pathName.includes('resource')) {
@@ -56,7 +58,14 @@ http.createServer(function (req, res) {
 
 	} else if (pathName.includes("refresh")) {
 		res.writeHead(200, {"Content-Type": "application/json"});
-		res.end(JSON.stringify(shared.slice(q.search.charAt(1))));
+		if (detailsObj>=0) {
+			//detailsArr.push({"item":detailsObj, "pos":-1});
+			//console.log("returning",JSON.stringify(detailsArr[0]));
+			res.end('[{"item":"'+detailsObj+'", "pos":"-1"}]');
+		} else {
+			console.log("returning",JSON.stringify(shared.slice(q.search.charAt(1))));
+			res.end(JSON.stringify(shared.slice(q.search.charAt(1))));
+		}
 
 	} else if (pathName.includes("change3D")) {
 		hologram = q.search.charAt(1)-1;
@@ -67,5 +76,15 @@ http.createServer(function (req, res) {
 	} else if (pathName.includes("get3D")) {
 		res.writeHead(200, {"Content-Type": "text/plain"});
 		res.end(hologram.toString());
+
+	} else if (pathName.includes("postDetails")) {
+		detailsObj = q.search.charAt(1);
+		res.writeHead(200, {"Content-Type": "text/plain"});
+		res.end();
+
+	} else if (pathName.includes("resetDetails")) {
+		detailsObj = -1;
+		res.writeHead(200, {"Content-Type": "text/plain"});
+		res.end();
 	}
 }).listen(9000);

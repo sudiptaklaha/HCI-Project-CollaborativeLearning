@@ -1,0 +1,34 @@
+<div class="row" >
+    <!--div class="localheadercol"-->
+        <div class="col s12 localheader teal lighten-2 center valign-wrapper" style="margin-left: -10px; height: 65px; justify-content: center;">
+        <h5>Shared List</h5>
+    </div>
+    <!--/div-->
+</div>
+      <div class="row ls-row">
+        <div class="col s4" id="drop1" ondrop="drop(event)" ondragover="allowDrop(event)" index="1"></div>
+        <div class="col s4" id="drop2" ondrop="drop(event)" ondragover="allowDrop(event)" index="2"></div>
+        <div class="col s4" id="drop3" ondrop="drop(event)" ondragover="allowDrop(event)" index="3"></div>
+      </div>
+      <div class="row ls-row">
+        <div class="col s4" id="drop4" ondrop="drop(event)" ondragover="allowDrop(event)" index="4"></div>
+        <div class="col s4" id="drop5" ondrop="drop(event)" ondragover="allowDrop(event)" index="5"></div>
+        <div class="col s4" id="drop6" ondrop="drop(event)" ondragover="allowDrop(event)" index="6"></div>
+      </div>
+      <div class="row ls-row">
+        <div class="col s4" id="drop7" ondrop="drop(event)" ondragover="allowDrop(event)" index="7"></div>
+        <div class="col s4" id="drop8" ondrop="drop(event)" ondragover="allowDrop(event)" index="8"></div>
+        <div class="col s4" id="drop9" ondrop="drop(event)" ondragover="allowDrop(event)" index="9"></div>
+      </div>
+      <script>
+      $('.ls-row>.col').on('dragover',function() {
+    $( this ).addClass("teal lighten-5 pulse");
+    $('.ls-row>.col').addClass("z-depth-1");
+  });
+  $('.ls-row>.col').on('dragleave',function() {
+    $( this ).removeClass("teal lighten-5 pulse");    
+  });
+  $('.list-item').on('dragend', function() {
+    $('.ls-row>.col').removeClass("z-depth-1");
+  });  
+      </script>

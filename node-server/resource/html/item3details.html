@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Collaborative Learning</title>
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="../js/materialize.min.js"></script>
-
-</head>
-<body>
 <script>
    var id;
      $(document).ready(function(){
@@ -61,7 +47,6 @@ h6
     justify-content:center;
     align-items: center;
     font-weight:bolder;
-    font-color:#f1f1f1 !important;
 
 }
 
@@ -71,18 +56,6 @@ h6
     height: 200px;
 }
 </style>
-<div class="row">
-  <div class="col s2"> 
-  </div>
-  <div class="col s8">
-    <div id="head-container">
-      <h6>Eye Ball</h6>
-    </div>
-  </div>
-  <div class="col s2">
-
-  </div>
-</div>
 <div class="row">
     <div class="col s2"> 
     </div>
@@ -99,7 +72,7 @@ h6
     <div class="col s2">
       <div class="row">
         <div class="col s12">
-          <button type="button" class="waves-effect waves-light btn">Back</button>
+          <button id="back" type="button" class="waves-effect waves-light btn" onclick="backClick()">Back</button>
         </div>
       </div>
     </div>
@@ -107,16 +80,8 @@ h6
 
 <div class="row">
     
-    <div class="col s2">
-      <div id="conatiner1"></div>
-    </div>
-
     <div class="col s8">
-      <div id="container2"><span class="green-text text-darken-2">Lens: Transparent structure inside the eye that focuses light rays onto the retina.<br/><br/>Retina: Nerve layer that lines the back of the eye, senses light, and creates electrical impulses that travel through the optic nerve to the brain.<br/><br/>Macula: Small central area in the retina that contains special light-sensitive cells and allows us to see fine details clearly.<br/><br/>Optic nerve: Connects the eye to the brain and carries the electrical impulses formed by the retina to the visual cortex of the brain.<br/><br/>Vitreous: Clear, jelly-like substance that fills the middle of the eye.</span></div>
-    </div>
-
-    <div class="col s2">
-      <div id="container3"></button></div>
+      <div id="container2"><span class="black-text text-darken-2">Lens: Transparent structure inside the eye that focuses light rays onto the retina.<br/><br/>Retina: Nerve layer that lines the back of the eye, senses light, and creates electrical impulses that travel through the optic nerve to the brain.<br/><br/>Macula: Small central area in the retina that contains special light-sensitive cells and allows us to see fine details clearly.<br/><br/>Optic nerve: Connects the eye to the brain and carries the electrical impulses formed by the retina to the visual cortex of the brain.<br/><br/>Vitreous: Clear, jelly-like substance that fills the middle of the eye.</span></div>
     </div>
 
 </div>

@@ -1,6 +1,7 @@
 var dropCount = 0;
 var sharedObjCount = 0;
 var rightClickedItem = 0;
+var detailsObj = -1;
 
 function allowDrop(ev) {
   ev.preventDefault();
@@ -15,12 +16,15 @@ function drop(ev) {
   
   ev.preventDefault();
   var data = ev.dataTransfer.getData('text/html');
+  //$(data).addClass('dropped');
   //ev.target.appendChild(data);
   $(ev.target).append(data);
-  if(++dropCount<=3) {
-    $('#shown-item-list-row').append('<div class="col s4"><div class="row v-list-item">'+data+'</div></div>');
-  }
-  //$('.ls-row>.col').removeClass("z-depth-1");
+  $(ev.target).children(":first").addClass('dropped');
+  var index = $(ev.target).children(":first").attr('index');//cursor: pointer;
+  $(ev.target).children(":first").css('cursor','pointer');
+  $(ev.target).children(":first").on('click', function() {
+    showDetails(index);
+  });
   $('.ls-row>.col').removeClass("teal lighten-5 pulse");
   sharedObjCount++;
   postToServer(data, ev);
@@ -31,12 +35,30 @@ function postToServer(data, ev) {
   var dropIndex = $(ev.target).attr('index');
 
   $.ajax({url: '/drag/?'+pickIndex+','+dropIndex, success: function(result){
-    console.log("posted data", dropIndex);
+    console.log("posted data", pickIndex, dropIndex);
   }});
 }
 
-$('document').ready( function () {
-  
+function showDetails(index) {
+  detailsObj = index;
+  $.ajax({url: '/postDetails?'+index, success: function(result){
+    console.log("posted details for index:", index);
+  }});
+  $.ajax({url: '/resource/html/item'+index+'details.html', success: function(result){
+    $('#large-screen').html(result);
+  }});
+}
+function backClick() {
+  $.ajax({url: '/resource/html/ls-grid.html', success: function(result){
+    $('#large-screen').html(result);
+  }});
+  $.ajax({url: '/resetDetails', success: function(result){
+  }});
+  sharedObjCount=0;
+  detailsObj = -1;
+}
+
+$('document').ready( function () {  
   $('.ls-row>.col').on('dragover',function() {
     $( this ).addClass("teal lighten-5 pulse");
     $('.ls-row>.col').addClass("z-depth-1");
@@ -46,7 +68,7 @@ $('document').ready( function () {
   });
   $('.list-item').on('dragend', function() {
     $('.ls-row>.col').removeClass("z-depth-1");
-  });
+  });  
 
   $('.list-item').contextmenu(function(e) {
     rightClickedItem = $(this).children(":first").attr('index');
@@ -82,18 +104,39 @@ $('document').ready( function () {
     });
     closeMenu();
   });
+  /*$('#back').click(function(){
+    console.log('clicked');
+    $.ajax({url: '/resource/html/ls-grid.html', success: function(result){
+      $('#large-screen').html(result);
+    }});
+  });*/
 
   setInterval(function() {
     $.ajax({url: '/refresh?'+sharedObjCount, success: function(result){      
       result.forEach(function(element) {
         console.log("appending item:", element.item , " :: to position:", element.pos);
-        $.ajax({url: '/resource/html/item'+element.item+'.html', success: function(result){
-          $('#drop'+element.pos).append(result);
-          /*if(++dropCount<=3) {
-            $('#shown-item-list-row').append('<div class="col s4"><div class="row v-list-item">'+result+'</div></div>');
-          }*/
-          sharedObjCount++;
-        }});
+        if(element.pos==-1) {
+          if(detailsObj!=element.item) {
+            console.log("putting shared object");
+            $.ajax({url: '/resource/html/item'+element.item+'details.html', success: function(result){
+              $('#large-screen').html(result);
+            }});
+            detailsObj=element.item;
+          }
+          sharedObjCount = 0;
+        } else {
+          console.log("putting element");
+          if(detailsObj>=0) {
+            detailsObj = -1;
+            $.ajax({url: '/resource/html/ls-grid.html', success: function(result){
+              $('#large-screen').html(result);
+            }});
+          }
+          $.ajax({url: '/resource/html/item'+element.item+'.html', success: function(result){
+            $('#drop'+element.pos).append(result);
+            sharedObjCount++;
+          }});
+        }
       });
     }});
   }, 1000);
