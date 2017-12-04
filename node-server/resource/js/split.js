@@ -12,13 +12,16 @@ var rotateHor  = 0;
 var zoomScale = 0;
 var originalScale = 0;
 
+//demo
+var rotationSwitch = false;
+
 var rotObjectMatrix;
 var xAxis = new THREE.Vector3(1,0,0);
 var yAxis = new THREE.Vector3(0,1,0);
 var zAxis = new THREE.Vector3(0,0,1);
 
 init();
-load_model(3);
+load_model(1);
 animate();
 setInterval(function() {
     $.ajax({url: '/get3D', success: function(result){
@@ -148,11 +151,17 @@ function rotate(direction){
             rotateHor = 0;
             break;
     }
+
+    //demo
+    rotationSwitch=true;
 }
 
 function zoom(direction){
-    switch(direction)
+    //demo
+    if(rotationSwitch ==true)
     {
+        switch(direction)
+        {
         case "in":
             zoomScale = 1.0;
             break;
@@ -164,7 +173,8 @@ function zoom(direction){
         case "stop":
             zoomScale = 0;
             break;
-    }
+        }
+    }       
 }
 function animate() {
 
@@ -178,18 +188,18 @@ function animate() {
         mesh_top.rotation.x += rotationalVector.x * rotateVert;
         mesh_top.rotation.z += rotationalVector.z * rotateHor;
 
-        mesh_bottom.rotation.x += rotationalVector.x * rotateVert;
+        mesh_bottom.rotation.x -= rotationalVector.x * rotateVert;
         mesh_bottom.rotation.z += rotationalVector.z * rotateHor;
 
     
-        // rotateOnObjectAxis(mesh_left, xAxis, rotationalVector.x * rotateVert);
-        // rotateOnObjectAxis(mesh_left, zAxis, rotationalVector.z * rotateHor);
-        // rotateOnObjectAxis(mesh_right, xAxis, rotationalVector.x * rotateVert);
-        // rotateOnObjectAxis(mesh_right, zAxis, rotationalVector.z * rotateHor);
-        mesh_left.rotation.x += rotationalVector.x * rotateHor;
-        mesh_left.rotation.z += rotationalVector.z * rotateVert;
-        mesh_right.rotation.x += rotationalVector.x * rotateHor;
-        mesh_right.rotation.z += rotationalVector.z * rotateVert;
+        rotateOnObjectAxis(mesh_left, xAxis, rotationalVector.x * rotateVert);
+        rotateOnObjectAxis(mesh_left, zAxis, rotationalVector.z * rotateHor);
+        rotateOnObjectAxis(mesh_right, xAxis, rotationalVector.x * rotateVert);
+        rotateOnObjectAxis(mesh_right, zAxis, rotationalVector.z * rotateHor);
+        //mesh_left.rotation.x += rotationalVector.x * rotateHor;
+        //mesh_left.rotation.z += rotationalVector.z * rotateVert;
+        //mesh_right.rotation.x += rotationalVector.x * rotateHor;
+        //mesh_right.rotation.z += rotationalVector.z * rotateVert;
 
         console.log(mesh_top.scale.x);
         if(mesh_top.scale.x >=1)
