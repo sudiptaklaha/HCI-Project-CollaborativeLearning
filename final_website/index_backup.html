@@ -9,36 +9,8 @@
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="style.css" type="text/css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="materialize.min.js"></script>
-<script>
-   var id;
-     $(document).ready(function(){
-     $('#carousel1').carousel();
-     $('.slider').slider();
-     $('.materialboxed').slider();
-
-     /*{
-          /*onAfterChange: function(slide, index) {
-            
-            console.log('slide:' + slide);
-            console.log('Index:'+ index);
-      
-          }*/
-          /*onCycleTo: function(data)
-          {
-            console.log(data);
-          }
-       });*/
-    });
-  </script>
 
 <body>
-  
 
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
@@ -49,7 +21,6 @@
       <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-info-circle"></i> About</a>
       <a href="#requirements" class="w3-bar-item w3-button"><i class = "fa fa-binoculars"></i> Requirements</a>
       <a href="#sketches" class="w3-bar-item w3-button"><i class="fa fa-newspaper-o"></i> Sketches</a>
-      <a href="#screenshots" class="w3-bar-item w3-button"><i class="glyphicon glyphicon-screenshot"></i>Screenshots</a>
       <a href="#evaluation" class="w3-bar-item w3-button"><i class="fa fa-pencil-square-o"></i> Evaluation</a>
       <a href="#demo" class="w3-bar-item w3-button"><i class="fa fa-file-video-o"></i> Demo</a>
       <a href="#Team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> Team</a>
@@ -86,7 +57,7 @@
 
 <!-- About Section -->
 <div class="w3-container" style="padding:50px 16px" id="about">
-  <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 25px">About the project</h3>
+  <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 30px">About the project</h3>
   <p class="w3-justify" style="padding:0px 40px 0px 40px">Our project is to understand the collaborative learning methods that are being practiced currently in the smart classrooms and discussions and build a cost effective system that can be used with minimal resources. The goal of our project is to build a system that improves the quality and effectiveness of collaborative learning in smart classrooms or in group discussions and to bring them closer to as many people as possible by making it affordable.</p>
   <div class="w3-row-padding w3-center" style="margin-top:64px; padding-left: 220px">
     <div class="w3-quarter">
@@ -110,17 +81,17 @@
 <!-- Requirements Section - "We know design" -->
 <div class="w3-container w3-light-grey" style="padding:50px 16px" id="requirements">
   <div class="w3-row-padding">
-    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 25px">Requirements</h3>
+    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 30px">Requirements</h3>
       <div class="w3-col m6" style="padding-left: 40px">
       <p>Several user studies and interviews were conducted to gather requirements. The following are the main requirements gathered:</p>
-      <ol>
+      <ul>
       <li>All users should be able to view the shared content without any obstructions</li>
       <li>Users should be able to view a 3D model of the shared object</li>
 	  <li>The system should enable the driver to manipulate 2D and 3D models with gesture interactions to avoid difficulties faced with traditional keyboard and mouse</li>
  	  <li>The system should allow the passengers to track which part the driver is talking about or looking at (ex: pointer or marker)</li>
       <li>The system should accommodate 2 to 10 users with one user as the driver</li>
 	  <li>The system should enable the driver to pull up more information about an object</li>
-	</ol>
+	</ul>
 	
       <p><a href="files/[Group 6] User Requirements (1).pdf" class="w3-button w3-black" download>Requirements documentation</a></p>
     </div>
@@ -133,18 +104,11 @@
 <!-- SKETCHES -->
 <div class="w3-container" style="padding:50px 16px" id="sketches">
   <div class="w3-row-padding">
-    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 25px">Sketches</h3>
+    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 30px">Sketches</h3>
       <div class="w3-col m6" style="padding-left: 40px">
       	<p class = "w3-justify">Several sketches have been drawn by brain storming before "making the right design". Check out the sketch diary for the detailed sketch iterations</p>
       	
-      	<!--<img src="images/1.jpg" id="mainImage" alt="Sketches" style="padding-left: 60px" width="500" height="400" />-->
-        <div class="carousel" id = "carousel1">
-    <!--<div class="carousel" id="carousel1" style="background-color:#333; opacity:1;" onmouseup="mouseup();">-->
-        <a class="carousel-item" href="#one!"><img src="images/1.jpg" height="280" width="280"></a>   
-        <a class="carousel-item" href="#two!"><img src="images/2.jpg" height="280" width="280p"></a>
-        <a class="carousel-item" href="#three!"><img src="images/3.jpg" height="280" width="280p"></a>
-        <a class="carousel-item" href="#four!"><img src="images/4.jpg" height="280" width="280p"></a>
-    </div>
+      	<img src="images/1.jpg" id="mainImage" alt="Sketches" style="padding-left: 60px" width="500" height="400" />
       
       <p><a href="files/[Group 6] Sketch Diary (1).pdf" class="w3-button w3-black" download>Sketch diary</a></p>
     </div>
@@ -157,139 +121,37 @@
   </div>
 </div>
 
-<div class="w3-container w3-light-grey" style="padding:50px 16px" id="screenshots">
-  <!--<div class="w3-row-padding w3-center">-->
-    <h3 class="w3-center w3-light-grey" style="font-family: 'Lobster', 'cursive'; font-size: 25px">Screenshots of the Interface</h3>
-   <div class="slider">
-    <ul class="slides w3-light-grey">
-      <li>
-        
-        <img src="images/localview1.jpg"> <!-- random image -->
-      
-        <div class="caption left-align">
-          <h5 class="blue-text">Local view on PC</h5>
-        </div>
-      </li>
-      <li> 
-          
-        <img src="images/sharedview1.jpg"> <!-- random image -->
-      
-        <div class="caption left-align">
-          <h5 class="blue-text">Shared screen view</h5>
-        </div>
-      </li>
-      <li> 
-         
-        <img src="images/contextmenu.jpg"> <!-- random image -->
-      
-        <div class="caption left-align">
-          <h5 class="blue-text">Local view Context menu</h5>
-        </div>
-      </li>
-      <li> 
-         
-        <img src="images/placeonshared.jpg"> <!-- random image -->
-      
-        <div class="caption left-align">
-          <h5 class="blue-text">Item added to shared screen</h5>
-        </div>
-      </li>
-      <li> 
-         
-        <img src="images/sharedviewitem.jpg"> <!-- random image -->
-      
-        <div class="caption left-align">
-          <h5 class="blue-text" style="font-weight:bold">View of item on shared screen</h5>
-        </div>
-      </li>
-      <li> 
-         
-        <img src="images/eye.png"> <!-- random image -->
-      
-        <div class="caption left-align">
-          <h5 class="blue-text">Details of item on shared screen</h5>
-        </div>
-      </li>
-      <li> 
-         
-        <img src="images/localitemdetail.jpg"> <!-- random image -->
-      
-        <div class="caption left-align">
-          <h5 class="blue-text">Details of item locally</h5>
-        </div>
-      </li>
-      </ul>
-  </div>
-</div>
-  <!--</div>-->
-<!--</div>-->
-
 <!-- EVALUATION -->
-<div class="w3-container" style="padding:50px 16px" id="evaluation">
+<div class="w3-container w3-light-grey" style="padding:50px 16px" id="evaluation">
   <div class="w3-row-padding">
-    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 25px">Evaluation</h3>
-      <div class="w3-col m6" style="padding-left: 40px; font-size: 12px;">
+    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 30px">Evaluation</h3>
+      <div class="w3-col m6" style="padding-left: 40px">
 
-      	<h5 style="font-weight: bold; font-size: 20px"> Formative Evaluation</h5>
+      	<h4 style="font-weight: bold"> Formative Evaluation</h4>
       	<p class="w3-justify">Formative evaluation is done while the system is in design phase before implementation. Wizard of Oz method has been used to evaluate the system in design. Refer to the formative evaluation documentation for further details</p>
 
       <p><a href="files/[Group 6] Formative Evaluation.pdf" class="w3-button w3-black" style="padding-left: 40px" download>Formative Evaluation Documentation</a></p>
-      <h5 style="font-weight: bold; font-size: 20px"> Summative Evaluation</h5>
-      <p class="w3-justify">Our tool was evaluated by two users who were given four tasks. Then the various metrics such as task success, task efficiency were calculated. The user experience and the feedback were recorded using SUS forms.</p>
-      <p>The four tasks were as follows:</p>
-      <ol class="w3-justify">
-        <li>Move eye object from local list to shared screen and display details of the eye object on shared screen.  Tell us the function of the eye’s lens</li>
-        <li>User was asked to place the pokey object in the hologram projector and rotate the object along y-axis and then stop rotating</li>
-        <li>User was asked to place the ant object in the hologram projector and zoom in on the object in the hologram projector, then zoom out and stop zooming</li>
-        <li>(Collaborative Task) User1 uploads the Pockey object on the shared screen. User two should find the various flavors of Pocky</li>
-      </ol>
-
-      <h6 style="font-weight:bold">Metrics</h6>
-      <p>The following are the metrics calculated from the summative evaluation:</p>
-      <img src="images/metrics1.jpg" width = "600">
-      <img src="images/metrics2.jpg" width = "600">
-      <h6 style="font-weight:bold">Feedback & Observations:</h6>
-      <p>The following are the questions asked from the SUS forms and the corresponding rating achieved on 1-5 scale (1 being low and 5 being high scores)</p>
-      <ol class = "w3-justify">
-        <li>Do you think the system achieves its objective? : 4</li>
-        <li>Do you find the system user friendly? : 4.5</li>
-        <li>How likely would you use this system for collaborative learning? : 4.5</li>
-        <li>How likely are you to recommend this system to your friends? : 4.5</li>
-        <li>Do you find the gestures for leap motion easy to perform? : 4</li>
-      </ol>
-
-      <p>The following observations were made by feedback from the users:</p>
-       <ol class = "w3-justify">
-        <li>All The tasks were performed with relative ease by the users because of simple and user friendly system design</li>
-        <li>The average task time was more for the tasks involving the leap motion for the interactions and so are the errors. The reason being that the users are not comfortable using leap motion sensor and informed that they need more familiarity to make swift interactions. Despite that, users finished the tasks successfully</li>
-        <li>They mentioned that the 'Delete item' option in the context menu can be placed at the end of the list as the users can accidently delete the objects</li>
-      </ol>
-
-
+      <h4 style="font-weight: bold"> Summative Evaluation</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
     </div>
     <div class="w3-col m6" style="padding:20px 120px">
-      <img class="w3-image w3-round-large" src="images/evaluation.jpg" alt="evaluation" style="padding: 20px 0px 0px 0px " width="400" height="400">
-      <img class="w3-image w3-round-large" src="images/Task4.png" alt="evaluation" style="padding: 60px 0px 0px 0px " width="400" height="400">
-      <img class="w3-image w3-round-large" src="images/Task2.png" alt="evaluation" style="padding: 60px 0px 0px 0px" width = "400" height="400" ">
-
-
+      <img class="w3-image w3-round-large" src="images/evaluation.jpg" alt="evaluation" style="padding: 40px 0px 0px 0px " width="400" height="400">
     </div>
-
-    </div>
+  </div>
 </div>
 
 <!-- DEMO -->
-<div class="w3-container w3-light-grey" style="padding:50px 16px" id="demo">
+<div class="w3-container" style="padding:50px 16px" id="demo">
   <div class="w3-row-padding w3-center">
-    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 25px">Demo</h3>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/lVUSreC54vw" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 30px">Demo</h3>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/6ZfuNTqbHE8" frameborder="0" allowfullscreen></iframe>
   </div>
 </div>
 
 <!-- TEAM -->
-<div class="w3-container" style="padding-top:50px" id="Team">
+<div class="w3-container w3-light-grey" style="padding-top:50px" id="Team">
   <div class="w3-row-padding w3-center">
-    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 25px">Team</h3>
+    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 30px">Team</h3>
   </div>
   <div class="w3-cell-row">
     <div class="w3-container w3-cell" style="text-align: center; vertical-align: middle;">
@@ -315,9 +177,9 @@
   </div>
 </div>
 
-<div class="w3-container w3-light-grey" style="padding:50px 16px" id="source_code">
+<div class="w3-container" style="padding:50px 16px" id="source_code">
   <div class="w3-row-padding w3-center">
-    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 25px">Source Code</h3>
+    <h3 class="w3-center" style="font-family: 'Lobster', 'cursive'; font-size: 30px">Source Code</h3>
     <a href="https://github.com/Ramkiranch" target="_blank" ><i class="fa fa-github" style="font-size: 60px" aria-hidden="true"></i></a>
             
   </div>
@@ -331,7 +193,7 @@
 To use this code on your website, get a free API key from Google.
 Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 -->
-<footer class="w3-center">Copyright &copy; HoloCL-HCI-UIC-2017. All rights Reserved</footer>
+<footer class="w3-center w3-light-grey">Copyright &copy; Project-X-HCI-UIC-2017. All rights Reserved</footer>
 
 </body>
 </html>

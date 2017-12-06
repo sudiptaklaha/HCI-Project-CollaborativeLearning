@@ -5,13 +5,29 @@ body, html {
 }
 /* Full height image header */
 .bgimg-1 {
-    background-position: center;
+    background-position: center bottom;
     background-size: cover;
-    background-image: url("images/Canon.jpg");
+    background-image: url("images/hologram3.png");
     min-height: 100%;
+
+}
 }
 .w3-bar .w3-button {
     padding: 16px;
+
+}
+
+/*.w3-image{
+    width:auto;
+    height:600px}
+*/
+
+
+.w3-top{
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index: 99;
 }
 
 
@@ -33,21 +49,22 @@ li{
 
 .slider-holder
 {
-    width: 300px;
-    height: 200px;
-    background-color: yellow;
+    width: 500px;
+    height: 900px;
+   
     margin-left: auto;
     margin-right: auto;
     margin-top: 0px;
     text-align: center;
     overflow: hidden;
+    
 }
 
 .image-holder
 {
-    width: 300px;
+    width: auto;
     background-color: red;
-    height: 200px;
+    height: auto;
     clear: both;
     position: relative;
     
@@ -57,13 +74,6 @@ li{
     transition: left 2s;
 }
 
-.slider-image
-{
-    float: left;
-    margin: 0px;
-    padding: 0px;
-    position: relative;
-}
 
 #slider-image-1:target ~ .image-holder
 {
